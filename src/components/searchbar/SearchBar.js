@@ -1,8 +1,33 @@
 import React, { useState } from "react";
-import Tracks from "../tracklist/TrackList";
-import styles from "./SearchBar.module.css"
+import styles from "./SearchBar.module.css";
 
-const SearchBar = () => {
+function SearchBar(props) {
+  const [term, setTerm] = useState("");
+
+  function passTerm() {
+    props.onSearch(term);
+  }
+
+  function handleTermChange({ target }) {
+    setTerm(target.value);
+  }
+
+  return (
+    <div className={styles.SearchBar}>
+      <input
+        placeholder="Enter a song, album or artist..."
+        onChange={handleTermChange}
+      />
+      <button className={styles.SearchButton} onClick={passTerm}>
+        Search
+      </button>
+    </div>
+  );
+}
+
+export default SearchBar;
+
+/* const SearchBar = () => {
   const [searchText, setSearchText] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [addedTracks, setAddedTracks] = useState([]);
@@ -43,14 +68,14 @@ const SearchBar = () => {
     <div className={styles.SearchBar}>
       <p>Enter your search below:</p>
       <input
-        id="input"
-        type="text"
         placeholder="Search for a song name..."
+        id="input"
+        type="text"        
         className="search"
         onChange={(e) => setSearchText(e.target.value)}
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleSearch} className="SearchButton">Search</button>
+      <button onClick={handleSearch} className={styles.SearchButton}>Search</button>
       {searchResults.length > 0 ? (
         <>
           <p>{searchResults.length} results found:</p>
@@ -93,10 +118,25 @@ const SearchBar = () => {
       )}
     </div>
   );
-};
-
-export default SearchBar;
+}; */
 
 // var clientID = "2928f694248c4e9ba046241a97bc46ed";
 // var clientSecret = "243776c519cf4559adb98d1e2cf94d8b"
 // const REDIRECT_URI = 'http://localhost:3000/';
+
+/* import React from "react";
+
+function SearchBar () {
+    return (
+        <div className="SearchBar">
+        <input
+          placeholder="Enter A Song, Album, or Artist"
+        />
+        <button className="SearchButton" >
+          SEARCH
+        </button>
+      </div>
+        );
+}
+
+export default SearchBar; */
